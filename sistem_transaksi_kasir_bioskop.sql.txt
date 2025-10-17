@@ -1,0 +1,104 @@
+-- ================================================
+-- TABEL PELANGGAN
+-- ================================================
+CREATE TABLE pelanggan (
+    id_pelanggan SERIAL PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    nomor_telepon VARCHAR(15)
+);
+
+-- ================================================
+-- TABEL KASIR
+-- ================================================
+CREATE TABLE kasir (
+    id_kasir SERIAL PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    shift_kerja VARCHAR(20) NOT NULL
+);
+
+-- ================================================
+-- TABEL FILM
+-- ================================================
+CREATE TABLE film (
+    id_film SERIAL PRIMARY KEY,
+    judul VARCHAR(200) NOT NULL,
+    genre VARCHAR(50) NOT NULL,
+    durasi INTEGER NOT NULL,
+    rating DECIMAL(3,1) NOT NULL
+);
+
+-- ================================================
+-- TABEL STUDIO
+-- ================================================
+CREATE TABLE studio (
+    id_studio SERIAL PRIMARY KEY,
+    nama_studio VARCHAR(50) NOT NULL,
+    kapasitas INTEGER NOT NULL
+);
+
+-- ================================================
+-- TABEL JADWAL
+-- ================================================
+CREATE TABLE jadwal (
+    id_jadwal SERIAL PRIMARY KEY,
+    id_film INTEGER NOT NULL REFERENCES film(id_film),
+    id_studio INTEGER NOT NULL REFERENCES studio(id_studio),
+    tanggal DATE NOT NULL,
+    jam_tayang TIME NOT NULL
+);
+
+-- ================================================
+-- TABEL TRANSAKSI
+-- ================================================
+CREATE TABLE transaksi (
+    id_transaksi SERIAL PRIMARY KEY,
+    id_pelanggan INTEGER NOT NULL REFERENCES pelanggan(id_pelanggan),
+    id_kasir INTEGER NOT NULL REFERENCES kasir(id_kasir),
+    total_harga DECIMAL(10,2) NOT NULL,
+    tanggal_transaksi TIMESTAMP NOT NULL
+);
+
+-- ================================================
+-- TABEL TIKET
+-- ================================================
+CREATE TABLE tiket (
+    id_tiket SERIAL PRIMARY KEY,
+    id_transaksi INTEGER NOT NULL REFERENCES transaksi(id_transaksi),
+    id_jadwal INTEGER NOT NULL REFERENCES jadwal(id_jadwal),
+    nomor_kursi VARCHAR(10) NOT NULL,
+    harga_film DECIMAL(10,2) NOT NULL
+);
+
+-- ================================================
+-- CREATE INDEXES (Opsional - untuk performance)
+-- ================================================
+
+-- Index untuk pencarian email pelanggan
+CREATE INDEX idx_pelanggan_email ON pelanggan(email);
+
+-- Index untuk pencarian film berdasarkan genre
+CREATE INDEX idx_film_genre ON film(genre);
+
+-- Index untuk pencarian jadwal berdasarkan tanggal
+CREATE INDEX idx_jadwal_tanggal ON jadwal(tanggal);
+
+-- Index untuk foreign keys
+CREATE INDEX idx_jadwal_film ON jadwal(id_film);
+CREATE INDEX idx_jadwal_studio ON jadwal(id_studio);
+CREATE INDEX idx_transaksi_pelanggan ON transaksi(id_pelanggan);
+CREATE INDEX idx_transaksi_kasir ON transaksi(id_kasir);
+CREATE INDEX idx_tiket_transaksi ON tiket(id_transaksi);
+CREATE INDEX idx_tiket_jadwal ON tiket(id_jadwal);
+
+-- ================================================
+-- VERIFICATION
+-- ================================================
+SELECT 'Tables created successfully!' AS status;
+
+-- Tampilkan daftar tabel yang telah dibuat
+SELECT table_name 
+FROM information_schema.tables 
+WHERE table_schema = 'public' 
+  AND table_type = 'BASE TABLE'
+ORDER BY table_name;
