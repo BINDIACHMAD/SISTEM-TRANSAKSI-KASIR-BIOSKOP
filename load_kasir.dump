@@ -1,11 +1,11 @@
-INSERT INTO kasir "id_kasir","nama","shift_kerja" VALUES
-1,"Siti Aisyah","Pagi"
-2,"Budi Hartono","Pagi"
-3,"Rina Kusuma","Siang"
-4,"Ahmad Ridwan","Siang"
-5,"Dewi Anggraini","Siang"
-6,"Eko Saputra","Malam"
-7,"Fitri Amalia","Malam"
-8,"Hendra Setiawan","Pagi"
-9,"Lina Marliana","Siang"
-10,"Agus Wijayanto","Malam"
+INSERT INTO kasir (nama, shift_kerja) VALUES
+('Rina Wulandari', 'Pagi'),
+('Dimas Prasetyo', 'Siang'),
+('Ayu Lestari', 'Malam'),
+('Bagus Setiawan', 'Pagi'),
+('Clara Wijaya', 'Siang'),
+('Farid Rahman', 'Malam'),
+('Gita Permatasari', 'Pagi'),
+('Hadi Nugroho', 'Siang'),
+('Intan Kartika', 'Malam'),
+('Johan Saputra', 'Pagi');
