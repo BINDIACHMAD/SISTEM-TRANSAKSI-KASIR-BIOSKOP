@@ -1,11 +1,11 @@
-INSERT INTO studio "id_studio","nama_studio","kapasitas" VALUES 
-1,"Studio 1",150
-2,"Studio 2",150
-3,"Studio 3",120
-4,"Studio 4",120
-5,"Studio 5",100
-6,"Studio 6",100
-7,"Studio Premiere 1",50
-8,"Studio Premiere 2",50
-9,"Studio VIP",30
-10,"Studio IMAX",200
+INSERT INTO studio (nama_studio, kapasitas) VALUES
+('Studio 1', 150),
+('Studio 2', 120),
+('Studio 3', 100),
+('Studio 4', 180),
+('Studio 5', 130),
+('Studio VIP 1', 50),
+('Studio VIP 2', 40),
+('Studio IMAX', 200),
+('Studio 3D-1', 140),
+('Studio Premier', 80);
